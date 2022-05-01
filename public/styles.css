@@ -56,7 +56,7 @@ input{
 .inputcontainer{
     display:flex;
     flex-direction:row;
-
+     margin-bottom: 10px;
     justify-content: center;
 }
 i{
@@ -66,4 +66,84 @@ i{
     min-width: 50px;
   text-align: center;
   border-bottom: 4px solid #FF8C32;
+}
+#sign-in-button{
+
+    margin-top: 10px;
+    width:310px;
+    outline:none;
+    height:40px;
+    border-radius:10px;
+    border:2px solid #FF8C32;
+    cursor: pointer;
+   
+
+    transition: 0.5s ease-in-out;
+}
+#sign-in-button:hover{
+    background-color: #06113C;
+    color: #DDDDDD;
+    
+    
+}
+
+/*admin panel*/
+
+.printer-container{
+   display: flex;
+   flex-direction: row;
+  flex-wrap: wrap;
+   justify-content:space-evenly;
+   align-items: center;
+   height:100vh;
+   width:100%;
+
+}
+.add-printer{
+    border-radius:30px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:30%;
+    border:8px solid #FF8C32;
+    height:50vh;
+    
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    background-color: #FDAF75;
+
+}
+.printer-available{
+    width:50%;
+    
+}
+.add-button{
+    width:150px;
+    border-radius:100%;
+    padding:20px;
+    height:150px;
+    border:4px solid #06113C;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+  
+    background-color: #001E6C;
+    transition: 0.5s ease-in-out;
+
+}
+.add-button i{
+    color:#DDDDDD;
+    border-bottom: none;
+}
+.add-button:hover{
+
+    background-color: #CCD1E4;
+    cursor: pointer;
+    color:black
+
+}
+
+.add-button:hover > i{
+   color: black;
 }
