@@ -23,17 +23,22 @@
             <form id="formcontainer" action="/signin" method="post">
                 <div class="inputcontainer">
                     <i class="fas fa-lock"></i>
-                    <input type="text" id="id" placeholder="Admin ID">
+                    <input type="text" id="id" name="id" placeholder="Admin ID">
                    
     
                 </div>
                 <div class="inputcontainer">
                     <i class="fas fa-key"></i>
-                    <input type="password" id="password" placeholder="Password">
+                    <input type="password" name="password" id="password" placeholder="Password">
                     
                 </div>
                 <button type="submit" id="sign-in-button">  Sign In</button>
                  </form>
+                 <% if(flag) {%>
+
+                    <h3 style="color:red">Check your password or email</h3>
+            <%}%>
+    
         </div>
         
     </div>

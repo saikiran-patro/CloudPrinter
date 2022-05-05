@@ -7,17 +7,86 @@
     <script src="https://kit.fontawesome.com/d7b7ce1508.js" crossorigin="anonymous"></script>
     <link rel="icon" href="/icon/favicon.ico" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
     <title>Cloud Printer</title>
 </head>
 <body>
     <nav id="header">
         <center><h1>Cloud Printer</h1></center>
     </nav>
-    <form class="printer-data-form" action="/printerdetails" method="post">
+    <div class="printerbody">
+        <div class="printerinnerbody">
+            <form class="printer-data-form" action="/printerdetails" method="post">
 
-        <img src="./printers/inkjet/inkjet1.png" alt="">
+                <img id="PrinterImage"src="./printers/inkjet/inkjet1.png" alt="">
+                <div class="file-input">
+                    <input type="file" id="file" class="file" name="image" onchange='Upload()'>
+                    
+                </div>
+                <div class="select_submit">
+                    <label id="file_select" for="file">Select file</label>
+               </div>
+               <div class="flexinputs"> 
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="nameofprinter" placeholder="Name of printer" required>
+          
+        
+                </div>
+                <div class="flexinputs">
+                    <label for="typeofprinter">Type of printer</label>
+                    <select id="typeofprinter" name="printertype" required>
+                        <option value="inkjet">Inkjet</option>
+                        <option value="Laser">Laser</option>
+                    </select>
+        
+                </div>
+                <div class="flexinputs">
+                    <label>Methods</label>
+                    <div class="methods">
+                        <input type="checkbox" id="duplex" name="duplex" value="duplex">
+                        <label for="duplex"> duplex</label><br>
+                        <input type="checkbox" id="colour" name="colour" value="colour">
+                        <label for="colour"> colour</label><br>
+                        <input type="checkbox" id="B/W" name="B/W" value="B/W">
+                        <label for="B/W"> Black & White</label><br><br>
+        
+                    </div>
+                   
+        
+                </div>
+                <div class="flexinputs">
+                    <label for="location">Location</label>
+                    <Textarea id="location" name="location" rows="10" cols="30"></Textarea>
+            
+        
+                </div>
+                <div class="flexinputs">
+                    <label for="status">Status</label>
+                    <div class="methods">
+                        <input type="radio" id="Active"name="status">
+                        <label for="Active">Active</label>
+                        <input type="radio" id="Deactive" name="status">
+                        <label for="Deactive">Deactive</label>
+            
+        
+                    </div>
+                   
+        
+        
+                </div>
+                  
+        
+             
+                <button type="submit" class="btn btn-outline-success"> <i class="fas fa-location-arrow "></i> ADD</button>
 
+        
+        
+            </form>
+        </div>
 
-    </form>
+    </div>
+    
 </body>
 </html>

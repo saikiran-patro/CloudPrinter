@@ -43,7 +43,7 @@ label{
     margin:5px 0px;
     font-size:1.5rem;
 }
-input{
+.inputcontainer input{
     width:100%;
     padding:10px;
     font-size: large;
@@ -59,7 +59,7 @@ input{
      margin-bottom: 10px;
     justify-content: center;
 }
-i{
+.inputcontainer i{
     color:#FF8C32;
     padding:10px;
 
@@ -88,6 +88,31 @@ i{
 }
 
 /*admin panel*/
+.printerbody{
+    background:linear-gradient(to bottom ,#06113C,#293B5F,#DBE6FD);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    min-height: 100vh;
+    height:100%;
+   padding:10px;
+    height:100%;
+    width:100%;
+}
+.printerinnerbody{
+    margin:20px;
+    border-radius: 30px;
+    background-color: #EEEEEE;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    min-height: 100vh;
+    height:100%;
+   width:80%;
+   
+}
 
 .printer-container{
    display: flex;
@@ -146,4 +171,83 @@ i{
 
 .add-button:hover > i{
    color: black;
+}
+
+/* printer details */
+
+.file-input input{
+    border:none;
+    display:none;
+}
+.printer-data-form{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+    width:100%;
+    padding:20px;
+}
+#PrinterImage{
+    max-width: 300px;
+    max-height: 300px;
+    width:50%;
+    height:50%;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.select_submit{
+    border:4px solid #F05454;
+    margin-top:10px;
+    background-color: #FF8C32;
+    color:#000000;
+    font-weight:bold;
+    padding:10px;
+    border-radius:30px;
+    transition: 0.5s ease-in-out;
+}
+.select_submit:hover{
+    background-color: #06113C;
+    color:#CCD1E4;
+    border:4px solid #FF8C32;
+    cursor: pointer;
+}
+.flexinputs{
+    margin-top: 20px;
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+    flex-wrap: wrap;
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+#typeofprinter{
+    width:50%;
+    outline:none;
+    font-size:large;
+    color:#06113C;
+    border:none;
+    background-color:#EEEEEE;
+    border-bottom:2px solid #06113C;
+}
+.methods{
+    width:50%;
+    background-color:#EEEEEE;
+}
+Textarea{
+    width:50%;
+    border:2px solid #06113C;
+    background-color:#EEEEEE;
+    font-weight: large;
+    font-size: large;
+}
+#name{
+    width:50%;
+    background-color:#EEEEEE;
+    outline:none;
+    border:none;
+    border-bottom:2px solid #06113C;
+    font-weight: large;
+    font-size: large;
 }
