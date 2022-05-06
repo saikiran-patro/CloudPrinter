@@ -18,11 +18,11 @@
     </nav>
     <div class="printerbody">
         <div class="printerinnerbody">
-            <form class="printer-data-form" action="/printerdetails" method="post">
+            <form class="printer-data-form" action="/addprinter" method="POST" enctype="multipart/form-data">
 
                 <img id="PrinterImage"src="./printers/inkjet/inkjet1.png" alt="">
                 <div class="file-input">
-                    <input type="file" id="file" class="file" name="image" onchange='Upload()'>
+                    <input type="file" id="file" class="file" name="image" >
                     
                 </div>
                 <div class="select_submit">
@@ -49,7 +49,7 @@
                         <label for="duplex"> duplex</label><br>
                         <input type="checkbox" id="colour" name="colour" value="colour">
                         <label for="colour"> colour</label><br>
-                        <input type="checkbox" id="B/W" name="B/W" value="B/W">
+                        <input type="checkbox" id="B/W" name="BlackandWhite" value="B/W">
                         <label for="B/W"> Black & White</label><br><br>
         
                     </div>
