@@ -43,9 +43,18 @@ const adminSchema=new mongoose.Schema({
   
 
 })
-// const printerSchema= new mongoose.Schema({
-
-// })
+const printerSchema= new mongoose.Schema({
+   Img:String,
+   Nameofprinter:{
+     type:String,
+     unique:true,
+   },
+   Typeofprinter:String,
+   Methods:[],
+   Location:String,
+   Status:Boolean,
+})
+const printer=mongoose.model('printer',printerSchema);
 const Admin= mongoose.model("Admin",adminSchema);
 app.get('/',(req, res) => {
    res.render('sign',{flag:0})
@@ -78,17 +87,59 @@ app.get("/printerdetails",(req, res) => {
   res.render('printers');
 })
 
-app.post("/addprinter",(req, res) => {
+app.post("/addprinter",upload.single('image'), (req, res) => {
 
-  console.log( req.body.image);
+  const Image=req.body.image;
+  const PrinterName=req.body.nameofprinter;
+  const PrinterType=req.body.printertype;
+  let methods=[];
+  if(req.body.duplex=="Duplex"){
+    methods.push("Duplex");
+  }
+  if(req.body.colour=="Colour"){
+     methods.push("Colour");
+  }
+  if(req.body.BlackWhite=="BlackWhite"){
+    methods.push("BlackWhite");
+  }
+
+  const Location=req.body.location;
+  let Status=true;
+  if(req.body.status=="Active"){
+     Status=true;
+  }
+  else{
+    Status=false;
+  }
+  console.log( req.file.filename);
   console.log( req.body.nameofprinter );
   console.log( req.body.printertype);
   console.log( req.body.duplex );
-  console.log( req.body.color );
-  console.log( req.body.BlackandWhite );
+  console.log( req.body.colour );
+  console.log( req.body.BlackWhite );
   console.log( req.body.location );
   console.log( req.body.status);
-  res.send("helloworld");
+
+  const newPrinter = new printer({
+    Img:Image,
+    Nameofprinter:PrinterName,
+    Typeofprinter:PrinterType,
+    Methods:methods,
+    Location:Location,
+    Status:Status,
+
+  })
+  newPrinter.save((err)=>{
+    if(err){
+        console.log(arr);
+    }
+    else{
+
+        // res.render("contacts",{contactLists:[]})
+        res.send("helloworld");
+    }
+})
+  
 
 })
 app.listen(5000,() => {
