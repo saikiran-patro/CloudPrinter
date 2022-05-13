@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose';
-
 import multer from 'multer';
 const storage = multer.diskStorage({
   //destination for files
@@ -9,7 +8,7 @@ const storage = multer.diskStorage({
     callback(null, './public/uploads/images');
   },
   filename: function (request, file, callback) {
-    callback(null, Date.now() + file.originalname);
+    callback(null, file.originalname);
   },
 });
 const upload = multer({
@@ -84,12 +83,12 @@ app.post('/signin',(req, res) => {
 })
 
 app.get("/printerdetails",(req, res) => {
-  res.render('printers');
+  res.render('printers',{flags:false});
 })
 
 app.post("/addprinter",upload.single('image'), (req, res) => {
 
-  const Image=req.body.image;
+  const Image=req.file.filename;
   const PrinterName=req.body.nameofprinter;
   const PrinterType=req.body.printertype;
   let methods=[];
@@ -129,13 +128,37 @@ app.post("/addprinter",upload.single('image'), (req, res) => {
     Status:Status,
 
   })
+  let flag=false;
   newPrinter.save((err)=>{
     if(err){
-        console.log(arr);
+        console.log(err);
+        flag=true;
+        res.render('printers',{flags:flag});
     }
     else{
+        printer.find({Status:1},(err,printers)=>{
+          if(err){
+            console.log(err);
 
-        // res.render("contacts",{contactLists:[]})
+          }
+          else{
+            if(printers){
+              console.log(printers);
+            }
+          }
+        })
+        printer.find({Status:0},(err,printers)=>{
+          if(err){
+            console.log(err);
+
+          }
+          else{
+            if(printers){
+              console.log(printers);
+            }
+          }
+        })
+      
         res.send("helloworld");
     }
 })
