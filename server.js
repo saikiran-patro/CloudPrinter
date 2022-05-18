@@ -70,7 +70,20 @@ app.post('/signin',(req, res) => {
       }
       else{
           if(foundUser){
-            res.render('Admin');
+
+
+            printer.find({},(err,printers)=>{
+              if(err){
+                console.log(err);
+                res.send('error');
+    
+              }
+              else{
+                if(printers){
+                  res.render('Admin',{printerList:printers});
+                }
+              }
+            })
           }
           else{
               
@@ -136,33 +149,62 @@ app.post("/addprinter",upload.single('image'), (req, res) => {
         res.render('printers',{flags:flag});
     }
     else{
-        printer.find({Status:1},(err,printers)=>{
+        printer.find({},(err,printers)=>{
           if(err){
             console.log(err);
+            res.send('error');
 
           }
           else{
             if(printers){
-              console.log(printers);
+              res.render('Admin',{printerList:printers});
             }
           }
         })
-        printer.find({Status:0},(err,printers)=>{
-          if(err){
-            console.log(err);
+        // printer.find({Status:0},(err,printers)=>{
+        //   if(err){
+        //     console.log(err);
 
-          }
-          else{
-            if(printers){
-              console.log(printers);
-            }
-          }
-        })
+        //   }
+        //   else{
+            
+        //       res.render('Admin',{printerList:printers})
+          
+          
+        //   }
+        // })
       
-        res.send("helloworld");
+      
     }
 })
   
+
+})
+
+/// delete a printer from the database
+
+app.post('/printer/delete/:name', (req, res)=>{
+
+  printer.deleteOne({Nameofprinter:req.params.name},(err)=>{
+    if(!err){
+      printer.find({},(err,printers)=>{
+        if(err){
+          console.log(err);
+          res.send('error');
+
+        }
+        else{
+          if(printers){
+            console.log("heellllpw a")
+            res.render('Admin',{printerList:printers});
+          }
+        }
+      })
+    }else{
+      res.send("error")
+    }
+    
+  })
 
 })
 app.listen(5000,() => {
