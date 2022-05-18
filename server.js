@@ -182,24 +182,28 @@ app.post("/addprinter",upload.single('image'), (req, res) => {
 })
 
 /// delete a printer from the database
+app.get('/adminprinters',(req,res)=>{
+   
+  printer.find({},(err,printers)=>{
+    if(err){
+      console.log(err);
+      res.send('error');
+
+    }
+    else{
+      if(printers){
+        
+        res.render('Admin',{printerList:printers});
+      }
+    }
+  })
+})
 
 app.post('/printer/delete/:name', (req, res)=>{
 
   printer.deleteOne({Nameofprinter:req.params.name},(err)=>{
     if(!err){
-      printer.find({},(err,printers)=>{
-        if(err){
-          console.log(err);
-          res.send('error');
-
-        }
-        else{
-          if(printers){
-            console.log("heellllpw a")
-            res.render('Admin',{printerList:printers});
-          }
-        }
-      })
+      res.redirect('/adminprinters');
     }else{
       res.send("error")
     }
