@@ -23,6 +23,8 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static("public"))
+//app.use(express.static( __dirname + '/public'));
+
 app.use(bodyParser.urlencoded({
     extended: true
   }));
@@ -210,6 +212,57 @@ app.post('/printer/delete/:name', (req, res)=>{
     
   })
 
+})
+
+//configure the printer 
+
+app.post('/:name', (req, res)=>{
+
+  printer.findOne({Nameofprinter:req.params.name},(err,founduser)=>{
+    if(founduser){
+      console.log(founduser)
+      res.render('printeredit',{printerDetails:founduser})
+    }
+    else{
+      res.send("error")
+    }
+  })
+})
+
+// edit and save the printer after configuration
+app.post('/edit/:editprinter',(req, res)=>{
+  const Image="inkjet1"
+  const PrinterName=req.body.nameofprinter;
+  const PrinterType=req.body.printertype;
+  let methods=[];
+  if(req.body.duplex=="Duplex"){
+    methods.push("Duplex");
+  }
+  if(req.body.colour=="Colour"){
+     methods.push("Colour");
+  }
+  if(req.body.BlackWhite=="BlackWhite"){
+    methods.push("BlackWhite");
+  }
+
+  const Location=req.body.location;
+  let Status=true;
+  if(req.body.status=="Active"){
+     Status=true;
+  }
+  else{
+    Status=false;
+  }
+
+
+  printer.updateOne({Nameofprinter:req.params.editprinter},{Img:Image,Nameofprinter:PrinterName,Typeofprinter:PrinterType,Methods:methods,Location:Location,Status:Status},(err,updated)=>{
+    if(!err) {
+      res.redirect('/adminprinters');
+    
+    }else{
+      res.send("error")
+    }
+  })
 })
 app.listen(5000,() => {
     console.log('listening on port 5000');

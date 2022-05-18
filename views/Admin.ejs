@@ -35,10 +35,13 @@
                     <div class="printer-info" >
                         <img src= "./uploads/images/<%= printerList[i].Img %>"  alt="">
                         <h3><%= printerList[i].Nameofprinter %></h3>
-                        <button type="button" class="btn btn-outline-dark"><i class="fas fa-wrench"></i> Configure</button>
-                        <form method="post" action="/printer/delete/<%= printerList[i].Nameofprinter %>">
-                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                        <form action="/<%= printerList[i].Nameofprinter %>" method="post" class="formbutton">
+                            <button type="submit" class="btn btn-outline-dark"><i class="fas fa-wrench"></i> Configure</button>
 
+                        </form>
+                        
+                        <form method="post" action="/printer/delete/<%= printerList[i].Nameofprinter %>" class="formbutton">
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
 
                         </form>
                         

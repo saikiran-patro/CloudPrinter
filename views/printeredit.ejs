@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/d7b7ce1508.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/icon/favicon.ico" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="/scripts/script.js"></script>
+    <title>Cloud Printer</title>
+</head>
+<body>
+    <% const address= printerDetails.Location %>
+    <nav id="header">
+        <center><h1>Cloud Printer</h1></center>
+    </nav>
+    <div class="printerbody">
+        <div class="printerinnerbody">
+            
+           
+            <form class="printer-data-form" action="/edit/<%= printerDetails.Nameofprinter %>" method="POST" enctype="multipart/form-data">
+
+                <img id="PrinterImage"src="./uploads/images/<%= printerDetails.Img %>" alt="">
+                <div class="file-input">
+                    <input type="file" id="file" class="file" name="image" onchange="Upload()">
+                    
+                </div>
+                <div class="select_submit">
+                    <label id="file_select" for="file">Select file</label>
+               </div>
+               <div class="flexinputs">  
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="nameofprinter" placeholder="Name of printer" required value="<%= printerDetails.Nameofprinter %>">
+          
+        
+                </div>
+                <div class="flexinputs">
+                    <label for="typeofprinter">Type of printer</label>
+                    <select id="typeofprinter" name="printertype" required>
+                     <%   if(printerDetails.Typeofprinter==='Laser'){ %>
+                            <option value="Laser" selected>Laser</option>
+                            <option value="inkjet" >Inkjet</option>
+
+                     <%   } else { %>
+                    
+                            <option value="inkjet" selected>Inkjet</option>
+                            <option value="Laser" >Laser</option>
+                       <% } %>
+                        
+                        
+                    </select>
+        
+                </div>
+                <div class="flexinputs">
+                    <label>Methods</label>
+                    <div class="methods">
+                        <% if(printerDetails.Methods.find(element => element=='Duplex')) { %>
+                            <input type="checkbox" checked id="duplex" name="duplex" value="Duplex">
+                        <% }else { %>
+                            <input type="checkbox"  id="duplex" name="duplex" value="Duplex">
+                        <% } %>
+                        <label for="duplex"> Duplex</label><br>
+                        <% if(printerDetails.Methods.find(element => element=='Colour')) { %>
+                            <input type="checkbox" checked id="colour" name="colour" value="Colour">
+                        <% } else { %>
+                            <input type="checkbox" id="colour" name="colour" value="Colour">
+                        <% } %>
+                        <label for="colour"> Colour</label><br>
+                        <% if(printerDetails.Methods.find(element => element=='BlackWhite')) { %>
+                            <input type="checkbox" checked id="B/W" name="BlackWhite" value="BlackWhite">
+                        <% } else { %>
+                            <input type="checkbox" id="B/W" name="BlackWhite" value="BlackWhite">
+                        <% } %>
+
+                        <label for="B/W"> Black & White</label><br><br>
+        
+                    </div>
+                   
+        
+                </div>
+                <div class="flexinputs">
+                    <label for="location">Location</label>
+                    <Textarea  id="location" name="location" rows="10" cols="30" ><%= printerDetails.Location %></Textarea>
+            
+        
+                </div>
+                <div class="flexinputs">
+                    <label for="status">Status</label>
+                    <div class="methods">
+                        <% if(printerDetails.Status===true) { %>
+                            <input checked type="radio" id="Active"name="status" value="Active">
+                            <label for="Active">Active</label>
+                            <input type="radio" id="Deactive" name="status" value="Deactive">
+                            <label for="Deactive">Deactive</label>
+                         <% } else { %>
+                            <input  type="radio" id="Active"name="status" value="Active">
+                            <label for="Active">Active</label>
+                            <input checked type="radio" id="Deactive" name="status" value="Deactive">
+                            <label for="Deactive">Deactive</label>
+                          <% } %>
+
+        
+                    </div>
+                   
+        
+        
+                </div>
+                  
+        
+             
+                <button type="submit" class="btn btn-outline-success"> <i class="far fa-save"></i> SAVE</button>
+
+        
+        
+            </form>
+        </div>
+
+    </div>
+    
+</body>
+</html>
