@@ -103,7 +103,7 @@ app.get("/printerdetails",(req, res) => {
 
 app.post("/addprinter",upload.single('image'), (req, res) => {
 
-  const Image=req.file.filename;
+  const Image=req.file.filename;  //here working with single route 
   const PrinterName=req.body.nameofprinter;
   const PrinterType=req.body.printertype;
   let methods=[];
@@ -218,22 +218,11 @@ app.post('/printer/delete/:name', (req, res)=>{
 
 app.post('/:name', (req, res)=>{
 
-  printer.findOne({Nameofprinter:req.params.name},(err,founduser)=>{
-    if(founduser){
-      console.log(founduser)
-      res.render('printeredit',{printerDetails:founduser})
-    }
-    else{
-      res.send("error")
-    }
-  })
-})
-
-// edit and save the printer after configuration
-app.post('/edit/:editprinter',(req, res)=>{
-  const Image="inkjet1"
-  const PrinterName=req.body.nameofprinter;
-  const PrinterType=req.body.printertype;
+  let paramaVal=req.params.name;
+  if(paramaVal.includes('edit')){
+   // const Image=req.file.filename;  //here working with single route 
+  const Printername=req.body.nameofprinter;
+  const Printertype=req.body.printertype;
   let methods=[];
   if(req.body.duplex=="Duplex"){
     methods.push("Duplex");
@@ -245,7 +234,7 @@ app.post('/edit/:editprinter',(req, res)=>{
     methods.push("BlackWhite");
   }
 
-  const Location=req.body.location;
+  const address=req.body.location;
   let Status=true;
   if(req.body.status=="Active"){
      Status=true;
@@ -253,17 +242,44 @@ app.post('/edit/:editprinter',(req, res)=>{
   else{
     Status=false;
   }
+ // console.log( req.file.filename);
+   console.log(req.body.image)
+  console.log( req.body.nameofprinter );
+  console.log( req.body.printertype);
+  console.log( req.body.duplex );
+  console.log( req.body.colour );
+  console.log( req.body.BlackWhite );
+  console.log( req.body.location );
+  console.log( req.body.status);
 
+    paramaVal=paramaVal.replace('edit','');
+    printer.updateOne({Nameofprinter:paramaVal},{$set: {Img:req.body.image,Nameofprinter:Printername,Typeofprinter:Printertype,Methods:methods,Location:address,Status:Status}},(err)=>{
+      if(!err){
+        res.redirect('/adminprinters');
+      }else{
+        res.send("error")
+      }
+    });
 
-  printer.updateOne({Nameofprinter:req.params.editprinter},{Img:Image,Nameofprinter:PrinterName,Typeofprinter:PrinterType,Methods:methods,Location:Location,Status:Status},(err,updated)=>{
-    if(!err) {
-      res.redirect('/adminprinters');
-    
-    }else{
-      res.send("error")
-    }
-  })
+  }
+  else{
+    printer.findOne({Nameofprinter:req.params.name},(err,founduser)=>{
+      if(founduser){
+        console.log(founduser)
+        res.render('printeredit',{printerDetails:founduser})
+      }
+      else{
+        res.send("error")
+      }
+    })
+
+  }
+
+  
 })
+
+// edit and save the printer after configuration
+  
 app.listen(5000,() => {
     console.log('listening on port 5000');
 });

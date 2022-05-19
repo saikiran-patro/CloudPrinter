@@ -19,11 +19,11 @@
     </nav>
     <div class="printerbody">
         <div class="printerinnerbody">
-            
+            <% const edit="edit" %>
            
-            <form class="printer-data-form" action="/edit/<%= printerDetails.Nameofprinter %>" method="POST" enctype="multipart/form-data">
+            <form class="printer-data-form" action="/<%= printerDetails.Nameofprinter + edit %>" method="POST" >
 
-                <img id="PrinterImage"src="./uploads/images/<%= printerDetails.Img %>" alt="">
+                <img id="PrinterImage" src="./uploads/images/<%= printerDetails.Img %>" alt="">
                 <div class="file-input">
                     <input type="file" id="file" class="file" name="image" onchange="Upload()">
                     
