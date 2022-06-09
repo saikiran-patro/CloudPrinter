@@ -287,8 +287,43 @@ Textarea{
     font-size: large;
 }
 
-
-
+/*user  */
+.fileinputcontainer{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100vh;
+}
+.fileinputcontainer .file-base{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: column;
+    background-color:#47B5FF;
+    width:40%;
+    height:40%;
+    border-radius:30px;
+    border: 10px solid #1363DF;
+}
+.select_submit_user{
+    border:4px solid #1F4690;
+    margin-top:10px;
+    background-color: #DFF6FF;
+    color:#000000;
+    font-weight:center;
+    padding:10px;
+    border-radius:15px;
+    transition: 0.5s ease-in-out;
+}
+.select_submit_user:hover{
+    background-color: #FFE5B4;
+    cursor: pointer;
+}
+.userbody{
+    background-image: url(./Userback.png);
+ background-size: 200px 200px;
+    ;
+}
 
 /*mobile version */
 

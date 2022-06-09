@@ -125,15 +125,7 @@ app.post("/addprinter",upload.single('image'), (req, res) => {
   else{
     Status=false;
   }
-  console.log( req.file.filename);
-  console.log( req.body.nameofprinter );
-  console.log( req.body.printertype);
-  console.log( req.body.duplex );
-  console.log( req.body.colour );
-  console.log( req.body.BlackWhite );
-  console.log( req.body.location );
-  console.log( req.body.status);
-
+  
   const newPrinter = new printer({
     Img:Image,
     Nameofprinter:PrinterName,
@@ -163,18 +155,6 @@ app.post("/addprinter",upload.single('image'), (req, res) => {
             }
           }
         })
-        // printer.find({Status:0},(err,printers)=>{
-        //   if(err){
-        //     console.log(err);
-
-        //   }
-        //   else{
-            
-        //       res.render('Admin',{printerList:printers})
-          
-          
-        //   }
-        // })
       
       
     }
@@ -243,16 +223,7 @@ app.post('/:name', (req, res)=>{
     Status=false;
   }
  // console.log( req.file.filename);
-   console.log(req.body.image)
-  console.log( req.body.nameofprinter );
-  console.log( req.body.printertype);
-  console.log( req.body.duplex );
-  console.log( req.body.colour );
-  console.log( req.body.BlackWhite );
-  console.log( req.body.location );
-  console.log( req.body.status);
-
-    paramaVal=paramaVal.replace('edit','');
+     paramaVal=paramaVal.replace('edit','');
     printer.updateOne({Nameofprinter:paramaVal},{$set: {Img:req.body.image,Nameofprinter:Printername,Typeofprinter:Printertype,Methods:methods,Location:address,Status:Status}},(err)=>{
       if(!err){
         res.redirect('/adminprinters');
@@ -278,7 +249,12 @@ app.post('/:name', (req, res)=>{
   
 })
 
-// edit and save the printer after configuration
+// USER COMPUTATION
+
+app.get('/user',(req, res)=>{
+
+  res.render('user')
+})
   
 app.listen(5000,() => {
     console.log('listening on port 5000');
